@@ -19,5 +19,11 @@ public class BulletMovement : MonoBehaviour
     {
         float speed = 15;
         BulletRigidBody.velocity = BulletRigidBody.velocity.normalized * speed;
+
+        if (transform.position.y < -0.1346011)
+        {
+            transform.position = new Vector3(0, 2, 0);
+            BulletRigidBody.AddForce(new Vector3(Random.Range(-15.0f, 15.0f), 15, 0));
+        }
     }
 }
