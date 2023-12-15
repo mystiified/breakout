@@ -4,25 +4,40 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody PlayerRigidBody;
+    bool YNquit = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerRigidBody = GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.A))
-        {
-            PlayerRigidBody.AddForce(new Vector3(-15, 0, 0));
-        }
+        YNquit = GameObject.Find("Sphere").GetComponent<BulletMovement>().quitswitch;
 
-        if (Input.GetKey(KeyCode.D))
+        if (YNquit == false)
         {
-            PlayerRigidBody.AddForce(new Vector3(15, 0, 0));
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.position = gameObject.transform.position + new Vector3(-0.3f, 0, 0);
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.position = gameObject.transform.position + new Vector3(0.3f, 0, 0);
+            }
+
+            if (gameObject.transform.position.x < -17.5f)
+            {
+                transform.position = new Vector3(-17.5f, 0, 0);
+            }
+
+            if (gameObject.transform.position.x > 17.5f)
+            {
+                transform.position = new Vector3(17.5f, 0, 0);
+            }
         }
     }
 }
